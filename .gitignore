@@ -1,0 +1,49 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### Frontend ###
+/src/main/frontend/node
+/src/main/frontend/dist
+/src/main/frontend/tmp
+/src/main/frontend/out-tsc
+/src/main/frontend/node_modules
+/src/main/frontend/chrome-profiler-events*.json
+/src/main/frontend/speed-measure-plugin*.json
+/src/main/frontend/.sass-cache
+/src/main/frontend/connect.lock
+/src/main/frontend/coverage
+/src/main/frontend/libpeerconnection.log
+/src/main/frontend/npm-debug.log
+/src/main/frontend/yarn-error.log
+/src/main/frontend/testem.log
+/src/main/frontend/typings
+/src/main/frontend/node_modules/
