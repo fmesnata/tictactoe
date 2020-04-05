@@ -1,23 +1,72 @@
-import {Component, OnInit} from '@angular/core';
-import {RxStompService} from "@stomp/ng2-stompjs";
-import {Router} from "@angular/router";
-import {AuthenticationService} from "../services/authentication.service";
+import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {RxStompService} from '@stomp/ng2-stompjs';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../services/authentication.service';
+import {rxStompConfig} from '../rx-stomp.config';
+import {Player} from '../authentication/player';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
+
+  public players: Player[] = [];
+
+  public currentPlayer: Player;
 
   constructor(private rxStompService: RxStompService,
               private authenticationService: AuthenticationService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.connectToWebSocketBroker();
+
+    this.rxStompService.watch('/topic/lobby.players')
+      .subscribe(message => this.players = JSON.parse(message.body));
+
+    this.rxStompService.watch('/user/topic/lobby.players.me')
+      .subscribe(message => this.currentPlayer = JSON.parse(message.body));
+
+    this.rxStompService.watch("/topic/lobby.players.state")
+      .subscribe(message => {
+        let player: Player = JSON.parse(message.body);
+        let index = this.players.findIndex(e => e.id === player.id);
+        this.players.splice(index, 1, player);
+      });
+  }
+
+  ngAfterContentInit(): void {
+    this.rxStompService.publish({
+      destination: '/app/lobby.players',
+      body: ''
+    });
+
+    this.rxStompService.publish({
+      destination: '/app/lobby.players.me',
+      body: ''
+    });
   }
 
   public disconnect(): void {
     this.authenticationService.logout().subscribe(() => this.router.navigate(['/auth']));
+  }
+
+  private connectToWebSocketBroker() {
+    this.rxStompService.configure(rxStompConfig);
+    this.rxStompService.activate();
+  }
+
+  ngOnDestroy(): void {
+    this.rxStompService.deactivate();
+  }
+
+  searchGame(): void {
+    this.currentPlayer.state = 'WAITING_FOR_GAME';
+    this.rxStompService.publish({
+      destination: '/app/lobby.players.state',
+      body: JSON.stringify(this.currentPlayer)
+    });
   }
 }

@@ -1,3 +1,12 @@
-<p>game works!</p>
+
+<div *ngIf="currentPlayer">Connected as {{currentPlayer.username}} {{currentPlayer.state}}</div>
+
+<ul>
+  <li *ngFor="let p of players">
+    {{p.username}} - {{p.state}}
+  </li>
+</ul>
+
+<button (click)="searchGame()">Search game</button>
 
 <button (click)="disconnect()">Disconnect</button>

@@ -10,10 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.servlet.ServletException;
@@ -21,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -48,7 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             public Authentication authenticate(Authentication authentication) throws AuthenticationException {
                 UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication;
                 List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("USER");
-                return new UsernamePasswordAuthenticationToken(authToken.getName(), authToken.getCredentials(), authorities);
+                String id = UUID.randomUUID().toString();
+                return new UsernamePasswordAuthenticationToken(authToken.getName() + "#" + id, authToken.getCredentials(), authorities);
             }
 
             @Override

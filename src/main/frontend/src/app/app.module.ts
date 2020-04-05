@@ -6,8 +6,7 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {GameComponent} from './game/game.component';
-import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from "@stomp/ng2-stompjs";
-import {rxStompConfig} from "./rx-stomp.config";
+import {RxStompService} from "@stomp/ng2-stompjs";
 import {AuthenticationComponent} from './authentication/authentication.component';
 
 @NgModule({
@@ -23,8 +22,7 @@ import {AuthenticationComponent} from './authentication/authentication.component
     FormsModule
   ],
   providers: [
-    {provide: InjectableRxStompConfig, useValue: rxStompConfig},
-    {provide: RxStompService, useFactory: rxStompServiceFactory, deps: [InjectableRxStompConfig]}
+    RxStompService
   ],
   bootstrap: [AppComponent]
 })
