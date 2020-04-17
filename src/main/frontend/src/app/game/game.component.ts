@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
 import {rxStompConfig} from '../rx-stomp.config';
 import {Player} from '../authentication/player';
+import {PlayerState} from "./playerState";
 
 @Component({
   selector: 'app-game',
@@ -15,6 +16,8 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
   public players: Player[] = [];
 
   public currentPlayer: Player;
+
+  public PlayerState: object = PlayerState;
 
   constructor(private rxStompService: RxStompService,
               private authenticationService: AuthenticationService,
@@ -62,8 +65,8 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
     this.rxStompService.deactivate();
   }
 
-  searchGame(): void {
-    this.currentPlayer.state = 'WAITING_FOR_GAME';
+  public changeState(playerState: PlayerState): void {
+    this.currentPlayer.state = playerState;
     this.rxStompService.publish({
       destination: '/app/lobby.players.state',
       body: JSON.stringify(this.currentPlayer)

@@ -1,12 +1,69 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <mat-icon class="logo">grid_on</mat-icon>
+    <span>Tic Tac Toe</span>
+    <span class="example-spacer"></span>
 
-<div *ngIf="currentPlayer">Connected as {{currentPlayer.username}} {{currentPlayer.state}}</div>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>face</mat-icon>
+    </button>
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item (click)="disconnect()">Disconnect</button>
+      <a mat-menu-item href="https://github.com/fmesnata/tictactoe">Code source</a>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-<ul>
-  <li *ngFor="let p of players">
-    {{p.username}} - {{p.state}}
-  </li>
-</ul>
+<section class="content">
+  <section class="players-list">
+    <h2>Players</h2>
+    <div class="current-player">
+      <h3>Me</h3>
+      <p>
+        <span *ngIf="currentPlayer">{{currentPlayer.username}} - {{currentPlayer.state}}</span>
+        <button *ngIf="currentPlayer.state === PlayerState[0]" mat-raised-button (click)="changeState(PlayerState[1])">Search game</button>
+        <button *ngIf="currentPlayer.state === PlayerState[1]"  mat-raised-button (click)="changeState(PlayerState[0])">Stop searching</button>
+      </p>
+    </div>
+    <div>
+      <h3>Connected players</h3>
+      <ul>
+        <li *ngFor="let p of players">
+          {{p.username}} - {{p.state}}
+        </li>
+      </ul>
+    </div>
+  </section>
 
-<button (click)="searchGame()">Search game</button>
+  <section class="gameboard">
+    <h2>Board</h2>
 
-<button (click)="disconnect()">Disconnect</button>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">clear</mat-icon>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">radio_button_unchecked</mat-icon>
+
+    <div class="grid">
+      <div class="line">
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      </div>
+      <div class="line">
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      </div>
+      <div class="line">
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="score">
+    <h2>Score</h2>
+
+  </section>
+</section>
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+.logo {
+  padding: 0 14px;
+}
+
+.content {
+  display: flex;
+  align-items: stretch;
+}
+
+.players-list {
+  flex: 25;
+}
+
+.gameboard {
+  flex: 50;
+}
+
+.score {
+  flex-grow: 25;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  display: flex;
+}
+
+.cell {
+  border: grey solid 2px;
+  height: 100px;
+  width: 100px;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}

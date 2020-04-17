@@ -1,6 +1,12 @@
-<form>
-  <label>Username: </label>
-  <input type="text" name="username" [(ngModel)]="player.username">
+<section>
+  <mat-card>
+    <form>
+      <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Farid" name="username" [(ngModel)]="player.username">
+      </mat-form-field>
 
-  <button type="submit" (click)="login()">Login</button>
-</form>
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
+    </form>
+  </mat-card>
+</section>
