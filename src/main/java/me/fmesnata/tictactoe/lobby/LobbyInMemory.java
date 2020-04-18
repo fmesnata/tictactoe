@@ -1,4 +1,4 @@
-package me.fmesnata.tictactoe.game.lobby;
+package me.fmesnata.tictactoe.lobby;
 
 import org.springframework.stereotype.Component;
 

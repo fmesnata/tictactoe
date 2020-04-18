@@ -1,12 +1,12 @@
-package me.fmesnata.tictactoe.game.lobby;
+package me.fmesnata.tictactoe.lobby;
 
 import java.util.List;
 
-public interface LobbyService {
+public interface Lobby {
 
     List<Player> listPlayers();
 
-    void addPlayer(String id);
+    void addPlayer(Player player);
 
     void removePlayer(String id);
 

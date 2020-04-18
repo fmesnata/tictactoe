@@ -5,6 +5,7 @@ import {AuthenticationService} from '../services/authentication.service';
 import {rxStompConfig} from '../rx-stomp.config';
 import {Player} from '../authentication/player';
 import {PlayerState} from "./playerState";
+import {Game} from "./game";
 
 @Component({
   selector: 'app-game',
@@ -37,6 +38,12 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
         let player: Player = JSON.parse(message.body);
         let index = this.players.findIndex(e => e.id === player.id);
         this.players.splice(index, 1, player);
+      });
+
+    this.rxStompService.watch("/user/topic/game")
+      .subscribe(message => {
+        let game: Game = JSON.parse(message.body);
+        this.changeState(PlayerState.IN_GAME);
       });
   }
 

@@ -1,11 +1,8 @@
-package me.fmesnata.tictactoe.game;
+package me.fmesnata.tictactoe.lobby;
 
-import me.fmesnata.tictactoe.game.lobby.LobbyService;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;

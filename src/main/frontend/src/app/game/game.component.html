@@ -19,7 +19,7 @@
     <h2>Players</h2>
     <div class="current-player">
       <h3>Me</h3>
-      <div>
+      <div *ngIf="currentPlayer">
         <span *ngIf="currentPlayer">{{currentPlayer.username}} - {{currentPlayer.state}}</span>
         <button *ngIf="currentPlayer.state === PlayerState[0]" mat-raised-button (click)="changeState(PlayerState[1])">
           Play

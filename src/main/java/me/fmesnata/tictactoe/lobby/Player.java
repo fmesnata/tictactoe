@@ -1,10 +1,10 @@
-package me.fmesnata.tictactoe.game.lobby;
+package me.fmesnata.tictactoe.lobby;
 
 import lombok.Data;
 
 @Data
 public class Player {
-    enum State {
+    public enum State {
         ONLINE, WAITING_FOR_GAME, IN_GAME
     }
 
