@@ -9,7 +9,7 @@
     </button>
     <mat-menu #appMenu="matMenu">
       <button mat-menu-item (click)="disconnect()">Disconnect</button>
-      <a mat-menu-item href="https://github.com/fmesnata/tictactoe">Code source</a>
+      <a mat-menu-item href="https://github.com/fmesnata/tictactoe">Source code</a>
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -19,11 +19,15 @@
     <h2>Players</h2>
     <div class="current-player">
       <h3>Me</h3>
-      <p>
+      <div>
         <span *ngIf="currentPlayer">{{currentPlayer.username}} - {{currentPlayer.state}}</span>
-        <button *ngIf="currentPlayer.state === PlayerState[0]" mat-raised-button (click)="changeState(PlayerState[1])">Search game</button>
-        <button *ngIf="currentPlayer.state === PlayerState[1]"  mat-raised-button (click)="changeState(PlayerState[0])">Stop searching</button>
-      </p>
+        <button *ngIf="currentPlayer.state === PlayerState[0]" mat-raised-button (click)="changeState(PlayerState[1])">
+          Play
+        </button>
+        <button *ngIf="currentPlayer.state === PlayerState[1]"  mat-raised-button (click)="changeState(PlayerState[0])">
+          Stop searching
+        </button>
+      </div>
     </div>
     <div>
       <h3>Connected players</h3>
@@ -38,8 +42,8 @@
   <section class="gameboard">
     <h2>Board</h2>
 
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">clear</mat-icon>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">radio_button_unchecked</mat-icon>
+    <mat-icon class="example-icon">clear</mat-icon>
+    <mat-icon class="example-icon">radio_button_unchecked</mat-icon>
 
     <div class="grid">
       <div class="line">
