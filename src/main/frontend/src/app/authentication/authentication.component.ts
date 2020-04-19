@@ -19,7 +19,9 @@ export class AuthenticationComponent implements OnInit {
   }
 
   public login(): void {
-    this.authenticationService.login(this.player.username)
-      .subscribe(() => this.router.navigate(['/game']));
+    if (this.player.username.length > 0) {
+      this.authenticationService.login(this.player.username)
+        .subscribe(() => this.router.navigate(['/game']));
+    }
   }
 }
