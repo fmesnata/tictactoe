@@ -15,10 +15,10 @@ import {Game} from "./game";
 export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
 
   public players: Player[] = [];
-
   public currentPlayer: Player;
-
   public PlayerState: object = PlayerState;
+  public game: Game = {grid: []} as Game;
+  public symbol: string;
 
   constructor(private rxStompService: RxStompService,
               private authenticationService: AuthenticationService,
@@ -42,8 +42,15 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
 
     this.rxStompService.watch("/user/topic/game")
       .subscribe(message => {
-        let game: Game = JSON.parse(message.body);
+        const game: Game = JSON.parse(message.body);
         this.changeState(PlayerState.IN_GAME);
+        this.game = game;
+        this.symbol = game.playerOne.id === this.currentPlayer.id ? 'O' : 'X';
+      });
+
+    this.rxStompService.watch("/user/topic/game.state")
+      .subscribe(message => {
+        this.game = JSON.parse(message.body);
       });
   }
 
@@ -68,15 +75,31 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
     this.rxStompService.activate();
   }
 
-  ngOnDestroy(): void {
-    this.rxStompService.deactivate();
-  }
-
   public changeState(playerState: PlayerState): void {
     this.currentPlayer.state = playerState;
     this.rxStompService.publish({
       destination: '/app/lobby.players.state',
       body: JSON.stringify(this.currentPlayer)
     });
+  }
+
+  public addSymbol(index: number, symbol: string): void {
+    if (this.isMyTurn(this.game.grid) && !this.game.grid[index]) {
+      this.game.grid[index] = symbol;
+
+      this.rxStompService.publish({
+        destination: '/app/game.play',
+        body: JSON.stringify(this.game)
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.rxStompService.deactivate();
+  }
+
+  private isMyTurn(grid: string[]): boolean {
+    const length = grid.filter(p => p !== null).length;
+    return this.symbol === 'O' && length % 2 === 0 || this.symbol === 'X' && length % 2 !== 0;
   }
 }

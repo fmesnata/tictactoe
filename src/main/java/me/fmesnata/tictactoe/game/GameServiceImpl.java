@@ -54,4 +54,14 @@ public class GameServiceImpl implements GameService {
     public List<Game> listGames() {
         return gamesManager.listGames();
     }
+
+    @Override
+    public Game findGame(String id) {
+        return gamesManager.findGame(id);
+    }
+
+    @Override
+    public Game save(Game game) {
+        return gamesManager.save(game);
+    }
 }

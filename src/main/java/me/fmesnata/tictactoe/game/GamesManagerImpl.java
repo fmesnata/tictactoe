@@ -21,4 +21,14 @@ public class GamesManagerImpl implements GamesManager {
     public List<Game> listGames() {
         return new ArrayList<>(games.values());
     }
+
+    @Override
+    public Game findGame(String id) {
+        return games.get(id);
+    }
+
+    @Override
+    public Game save(Game game) {
+        return games.put(game.getId(), game);
+    }
 }

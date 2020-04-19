@@ -20,7 +20,16 @@
     <div class="current-player">
       <h3>Me</h3>
       <div *ngIf="currentPlayer">
-        <span *ngIf="currentPlayer">{{currentPlayer.username}} - {{currentPlayer.state}}</span>
+        <p>
+          <span *ngIf="currentPlayer">{{currentPlayer.username}} - {{currentPlayer.state}}</span>
+          <br>
+          <span *ngIf="symbol === 'O'">Player 1</span>
+          <span *ngIf="symbol === 'X'">Player 2</span>
+          <br>
+          I play with :
+          <mat-icon *ngIf="symbol === 'X'" class="example-icon">clear</mat-icon>
+          <mat-icon *ngIf="symbol === 'O'" class="example-icon">radio_button_unchecked</mat-icon>
+        </p>
         <button *ngIf="currentPlayer.state === PlayerState[0]" mat-raised-button (click)="changeState(PlayerState[1])">
           Play
         </button>
@@ -42,18 +51,39 @@
   <section class="gameboard">
     <h2>Board</h2>
 
-    <mat-icon class="example-icon">clear</mat-icon>
-    <mat-icon class="example-icon">radio_button_unchecked</mat-icon>
-
     <div class="grid">
       <div class="line">
-        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell" (click)="addSymbol(0, symbol)">
+          <app-symbol [symbol]="game.grid[0]"></app-symbol>
+        </div>
+        <div class="cell" (click)="addSymbol(1, symbol)">
+          <app-symbol [symbol]="game.grid[1]"></app-symbol>
+        </div>
+        <div class="cell" (click)="addSymbol(2, symbol)">
+          <app-symbol [symbol]="game.grid[2]"></app-symbol>
+        </div>
       </div>
       <div class="line">
-        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell" (click)="addSymbol(3, symbol)">
+          <app-symbol [symbol]="game.grid[3]"></app-symbol>
+        </div>
+        <div class="cell" (click)="addSymbol(4, symbol)">
+          <app-symbol [symbol]="game.grid[4]"></app-symbol>
+        </div>
+        <div class="cell" (click)="addSymbol(5, symbol)">
+          <app-symbol [symbol]="game.grid[5]"></app-symbol>
+        </div>
       </div>
       <div class="line">
-        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="cell" (click)="addSymbol(6, symbol)">
+          <app-symbol [symbol]="game.grid[6]"></app-symbol>
+        </div>
+        <div class="cell" (click)="addSymbol(7, symbol)">
+          <app-symbol [symbol]="game.grid[7]"></app-symbol>
+        </div>
+        <div class="cell" (click)="addSymbol(8, symbol)">
+          <app-symbol [symbol]="game.grid[8]"></app-symbol>
+        </div>
       </div>
     </div>
   </section>

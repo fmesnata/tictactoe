@@ -7,4 +7,8 @@ public interface GamesManager {
     void addGame(Game game);
 
     List<Game> listGames();
+
+    Game findGame(String id);
+
+    Game save(Game game);
 }

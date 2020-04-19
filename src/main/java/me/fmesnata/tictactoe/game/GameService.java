@@ -6,4 +6,8 @@ public interface GameService {
     void createGames();
 
     List<Game> listGames();
+
+    Game findGame(String id);
+
+    Game save(Game game);
 }
