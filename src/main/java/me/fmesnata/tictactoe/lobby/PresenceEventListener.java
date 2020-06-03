@@ -3,6 +3,7 @@ package me.fmesnata.tictactoe.lobby;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
@@ -29,6 +30,7 @@ public class PresenceEventListener {
     @EventListener
     public void onDisconnect(SessionDisconnectEvent event) {
         SimpMessageHeaderAccessor headers = SimpMessageHeaderAccessor.wrap(event.getMessage());
+        SecurityContextHolder.getContext().setAuthentication(null);
         this.lobbyService.removePlayer(headers.getUser().getName());
         this.messagingTemplate.convertAndSend("/topic/lobby.players", this.lobbyService.listPlayers());
     }
