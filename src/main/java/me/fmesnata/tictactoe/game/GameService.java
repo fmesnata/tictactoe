@@ -9,5 +9,7 @@ public interface GameService {
 
     Game findGame(String id);
 
-    Game save(Game game);
+    void save(Game game);
+
+    Game checkGrid(Game game);
 }

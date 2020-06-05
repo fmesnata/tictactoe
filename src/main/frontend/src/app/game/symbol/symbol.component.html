@@ -1,2 +1,2 @@
-<mat-icon *ngIf="symbol == 'X'" class="symbol cross">clear</mat-icon>
-<mat-icon *ngIf="symbol == 'O'" class="symbol circle">radio_button_unchecked</mat-icon>
+<mat-icon *ngIf="symbol == 'X'" class="symbol cross" [ngClass]="{'winning-symbol' : winning}">clear</mat-icon>
+<mat-icon *ngIf="symbol == 'O'" class="symbol circle" [ngClass]="{'winning-symbol' : winning}">radio_button_unchecked</mat-icon>

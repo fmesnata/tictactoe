@@ -20,8 +20,9 @@ public class GameApi {
     public void play(@Payload Game game) {
         Game existingGame = gameService.findGame(game.getId());
         existingGame.setGrid(game.getGrid());
-        Game savedGame = gameService.save(game);
-        messagingTemplate.convertAndSendToUser(game.getPlayerOne().getId(), "/topic/game.state", savedGame);
-        messagingTemplate.convertAndSendToUser(game.getPlayerTwo().getId(), "/topic/game.state", savedGame);
+        Game updated = gameService.checkGrid(game);
+        gameService.save(updated);
+        messagingTemplate.convertAndSendToUser(game.getPlayerOne().getId(), "/topic/game.state", updated);
+        messagingTemplate.convertAndSendToUser(game.getPlayerTwo().getId(), "/topic/game.state", updated);
     }
 }

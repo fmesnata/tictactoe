@@ -10,5 +10,5 @@ public interface GamesManager {
 
     Game findGame(String id);
 
-    Game save(Game game);
+    void save(Game game);
 }

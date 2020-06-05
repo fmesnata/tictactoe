@@ -28,7 +28,7 @@ public class GamesManagerImpl implements GamesManager {
     }
 
     @Override
-    public Game save(Game game) {
-        return games.put(game.getId(), game);
+    public void save(Game game) {
+        games.put(game.getId(), game);
     }
 }

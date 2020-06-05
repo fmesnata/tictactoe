@@ -7,8 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class SymbolComponent implements OnInit {
 
-  @Input()
-  symbol: string;
+  @Input() symbol: string;
+  @Input() winning: boolean;
 
   constructor() { }
 

@@ -17,7 +17,7 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
   public players: Player[] = [];
   public currentPlayer: Player;
   public PlayerState: object = PlayerState;
-  public game: Game = {grid: []} as Game;
+  public game: Game = {grid: [], winningLine: []} as Game;
   public symbol: string;
 
   constructor(private rxStompService: RxStompService,
@@ -84,7 +84,7 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   public addSymbol(index: number, symbol: string): void {
-    if (this.isMyTurn(this.game.grid) && !this.game.grid[index]) {
+    if (!this.game.winner && this.isMyTurn(this.game.grid) && !this.game.grid[index]) {
       this.game.grid[index] = symbol;
 
       this.rxStompService.publish({
@@ -101,5 +101,9 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
   private isMyTurn(grid: string[]): boolean {
     const length = grid.filter(p => p !== null).length;
     return this.symbol === 'O' && length % 2 === 0 || this.symbol === 'X' && length % 2 !== 0;
+  }
+
+  isCellWinning(index: number) {
+    return this.game.winningLine.indexOf(index) > -1;
   }
 }

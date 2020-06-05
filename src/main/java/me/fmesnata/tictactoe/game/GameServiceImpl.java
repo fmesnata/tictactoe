@@ -6,6 +6,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -19,10 +20,16 @@ public class GameServiceImpl implements GameService {
 
     private final SimpMessagingTemplate messagingTemplate;
 
-    public GameServiceImpl(LobbyService lobbyService, GamesManager gamesManager, SimpMessagingTemplate messagingTemplate) {
+    private final GameValidator gameValidator;
+
+    public GameServiceImpl(LobbyService lobbyService,
+                           GamesManager gamesManager,
+                           SimpMessagingTemplate messagingTemplate,
+                           GameValidator gameValidator) {
         this.lobbyService = lobbyService;
         this.gamesManager = gamesManager;
         this.messagingTemplate = messagingTemplate;
+        this.gameValidator = gameValidator;
     }
 
     @Scheduled(fixedRate = 5000)
@@ -39,6 +46,8 @@ public class GameServiceImpl implements GameService {
 
         for (int i = 0; i < playersReady.size() - 1; i += 2) {
             Game game = new Game();
+            List<Game.Symbol> grid = Arrays.asList(null, null, null, null, null, null, null, null, null);
+            game.setGrid(grid);
             game.setId(UUID.randomUUID().toString());
             Player playerOne = playersReady.get(i);
             Player playerTwo = playersReady.get(i + 1);
@@ -61,7 +70,12 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Game save(Game game) {
-        return gamesManager.save(game);
+    public void save(Game game) {
+        gamesManager.save(game);
+    }
+
+    @Override
+    public Game checkGrid(Game game) {
+        return gameValidator.isThereWinner(game);
     }
 }

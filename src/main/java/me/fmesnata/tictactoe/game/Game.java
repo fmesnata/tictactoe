@@ -12,8 +12,10 @@ public class Game {
     private List<Symbol> grid = new ArrayList<>(9);
     private Player playerOne;
     private Player playerTwo;
+    private Player winner;
+    private List<Integer> winningLine = new ArrayList<>(3);
 
-    private enum Symbol {
-        X,O
+    public enum Symbol {
+        X, O
     }
 }
