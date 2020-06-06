@@ -30,7 +30,7 @@
           <mat-icon *ngIf="symbol === 'X'" class="example-icon">clear</mat-icon>
           <mat-icon *ngIf="symbol === 'O'" class="example-icon">radio_button_unchecked</mat-icon>
         </p>
-        <button *ngIf="currentPlayer.state === PlayerState['ONLINE']" mat-raised-button (click)="changeState(PlayerState['WAITING_FOR_GAME'])">
+        <button *ngIf="currentPlayer.state === PlayerState['ONLINE'] || (game.winner && currentPlayer.state === PlayerState['IN_GAME'])" mat-raised-button (click)="changeState(PlayerState['WAITING_FOR_GAME'])">
           Play
         </button>
         <button *ngIf="currentPlayer.state === PlayerState['WAITING_FOR_GAME']"  mat-raised-button (click)="changeState(PlayerState['ONLINE'])">
