@@ -50,41 +50,7 @@
   <section class="gameboard">
     <h2>Board</h2>
 
-    <div class="grid">
-      <div class="line">
-        <div class="cell" (click)="addSymbol(0, symbol)">
-          <app-symbol [symbol]="game.grid[0]" [winning]="isCellWinning(0)"></app-symbol>
-        </div>
-        <div class="cell" (click)="addSymbol(1, symbol)">
-          <app-symbol [symbol]="game.grid[1]" [winning]="isCellWinning(1)"></app-symbol>
-        </div>
-        <div class="cell" (click)="addSymbol(2, symbol)">
-          <app-symbol [symbol]="game.grid[2]" [winning]="isCellWinning(2)"></app-symbol>
-        </div>
-      </div>
-      <div class="line">
-        <div class="cell" (click)="addSymbol(3, symbol)">
-          <app-symbol [symbol]="game.grid[3]" [winning]="isCellWinning(3)"></app-symbol>
-        </div>
-        <div class="cell" (click)="addSymbol(4, symbol)">
-          <app-symbol [symbol]="game.grid[4]" [winning]="isCellWinning(4)"></app-symbol>
-        </div>
-        <div class="cell" (click)="addSymbol(5, symbol)">
-          <app-symbol [symbol]="game.grid[5]" [winning]="isCellWinning(5)"></app-symbol>
-        </div>
-      </div>
-      <div class="line">
-        <div class="cell" (click)="addSymbol(6, symbol)">
-          <app-symbol [symbol]="game.grid[6]" [winning]="isCellWinning(6)"></app-symbol>
-        </div>
-        <div class="cell" (click)="addSymbol(7, symbol)">
-          <app-symbol [symbol]="game.grid[7]" [winning]="isCellWinning(7)"></app-symbol>
-        </div>
-        <div class="cell" (click)="addSymbol(8, symbol)">
-          <app-symbol [symbol]="game.grid[8]" [winning]="isCellWinning(8)"></app-symbol>
-        </div>
-      </div>
-    </div>
+    <app-grid [grid]="game.grid" [winningLine]="game.winningLine" (addSymbolEvent)="addSymbol($event)"></app-grid>
   </section>
 
   <section class="score">

@@ -16,13 +16,15 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import { SymbolComponent } from './game/symbol/symbol.component';
+import { GridComponent } from './game/grid/grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameComponent,
     AuthenticationComponent,
-    SymbolComponent
+    SymbolComponent,
+    GridComponent
   ],
   imports: [
     BrowserModule,

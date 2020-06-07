@@ -83,9 +83,9 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
     });
   }
 
-  public addSymbol(index: number, symbol: string): void {
+  public addSymbol(index: number): void {
     if (!this.game.winner && this.isMyTurn(this.game.grid) && !this.game.grid[index]) {
-      this.game.grid[index] = symbol;
+      this.game.grid[index] = this.symbol;
 
       this.rxStompService.publish({
         destination: '/app/game.play',
