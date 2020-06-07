@@ -5,6 +5,7 @@ export interface Game {
   grid: string[];
   playerOne: Player;
   playerTwo: Player;
-  winningLine: number[];
+  state: string;
   winner: Player;
+  winningLine: number[];
 }

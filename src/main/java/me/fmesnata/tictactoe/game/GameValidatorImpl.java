@@ -21,6 +21,10 @@ public class GameValidatorImpl implements GameValidator {
             checkedGame = checkDiagonalLines(game);
         }
 
+        if (checkedGame.getState() == Game.State.ONGOING) {
+            checkedGame = checkDraw(game);
+        }
+
         return checkedGame;
     }
 
@@ -39,6 +43,7 @@ public class GameValidatorImpl implements GameValidator {
                 Player winner = firstCell == Game.Symbol.O ? game.getPlayerOne() : game.getPlayerTwo();
                 game.setWinner(winner);
                 game.setWinningLine(List.of(i, i+1, i+2));
+                game.setState(Game.State.WON);
             }
         }
 
@@ -60,6 +65,7 @@ public class GameValidatorImpl implements GameValidator {
                 Player winner = firstCell == Game.Symbol.O ? game.getPlayerOne() : game.getPlayerTwo();
                 game.setWinner(winner);
                 game.setWinningLine(List.of(i, i+3, i+6));
+                game.setState(Game.State.WON);
             }
         }
 
@@ -73,12 +79,22 @@ public class GameValidatorImpl implements GameValidator {
             Player winner = grid.get(0) == Game.Symbol.O ? game.getPlayerOne() : game.getPlayerTwo();
             game.setWinner(winner);
             game.setWinningLine(List.of(0, 4, 8));
+            game.setState(Game.State.WON);
         } else if (grid.get(2) != null && grid.get(2) == grid.get(4) && grid.get(2) == grid.get(6)) {
             Player winner = grid.get(2) == Game.Symbol.O ? game.getPlayerOne() : game.getPlayerTwo();
             game.setWinner(winner);
             game.setWinningLine(List.of(2, 4, 6));
+            game.setState(Game.State.WON);
         }
 
+        return game;
+    }
+
+
+    private Game checkDraw(Game game) {
+        if (!game.getGrid().contains(null)) {
+            game.setState(Game.State.DRAW);
+        }
         return game;
     }
 }

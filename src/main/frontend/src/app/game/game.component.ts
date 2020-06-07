@@ -100,7 +100,7 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
 
   public playerCanPlay(): boolean {
     return this.currentPlayer.state === PlayerState.ONLINE
-      || (this.game.winner && this.currentPlayer.state === PlayerState.IN_GAME);
+      || (this.game.state !== 'ONGOING' && this.currentPlayer.state === PlayerState.IN_GAME);
   }
 
   public playerCanCancelSearch(): boolean {
