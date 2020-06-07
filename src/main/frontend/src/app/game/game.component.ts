@@ -94,6 +94,19 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
+  public isCellWinning(index: number) {
+    return this.game.winningLine.indexOf(index) > -1;
+  }
+
+  public playerCanPlay(): boolean {
+    return this.currentPlayer.state === PlayerState.ONLINE
+      || (this.game.winner && this.currentPlayer.state === PlayerState.IN_GAME);
+  }
+
+  public playerCanCancelSearch(): boolean {
+    return this.currentPlayer.state === PlayerState['WAITING_FOR_GAME'];
+  }
+
   ngOnDestroy(): void {
     this.rxStompService.deactivate();
   }
@@ -101,9 +114,5 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
   private isMyTurn(grid: string[]): boolean {
     const length = grid.filter(p => p !== null).length;
     return this.symbol === 'O' && length % 2 === 0 || this.symbol === 'X' && length % 2 !== 0;
-  }
-
-  isCellWinning(index: number) {
-    return this.game.winningLine.indexOf(index) > -1;
   }
 }

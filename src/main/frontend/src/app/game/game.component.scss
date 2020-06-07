@@ -8,7 +8,7 @@
 }
 
 .players-list {
-  flex: 25;
+  flex: 30;
   padding: 14px;
   button {
     margin: 0 14px;
@@ -16,12 +16,12 @@
 }
 
 .gameboard {
-  flex: 50;
+  flex: 40;
   padding: 14px;
 }
 
 .score {
-  flex-grow: 25;
+  flex-grow: 30;
   padding: 14px;
 }
 
@@ -49,4 +49,8 @@
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+h2 {
+  text-align: center;
 }
