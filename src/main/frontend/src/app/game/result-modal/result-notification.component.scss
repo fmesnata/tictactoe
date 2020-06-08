@@ -1,0 +1,16 @@
+.notification {
+  display: flex;
+  align-items: center;
+}
+
+.winner-color {
+  background-color: lightgreen;
+}
+
+.looser-color {
+  background-color: lightyellow;
+}
+
+.draw-color {
+  background-color: lightblue;
+}

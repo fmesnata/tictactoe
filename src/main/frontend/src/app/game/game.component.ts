@@ -94,10 +94,6 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
-  public isCellWinning(index: number) {
-    return this.game.winningLine.indexOf(index) > -1;
-  }
-
   public playerCanPlay(): boolean {
     return this.currentPlayer.state === PlayerState.ONLINE
       || (this.game.state !== 'ONGOING' && this.currentPlayer.state === PlayerState.IN_GAME);
@@ -105,6 +101,14 @@ export class GameComponent implements OnInit, OnDestroy, AfterContentInit {
 
   public playerCanCancelSearch(): boolean {
     return this.currentPlayer.state === PlayerState['WAITING_FOR_GAME'];
+  }
+
+  public isGameFinish(): boolean {
+    return this.game.state !== 'ONGOING';
+  }
+
+  public isCurrentUserWinner(): boolean {
+    return this.game.winner && this.game.winner.id === this.currentPlayer.id;
   }
 
   ngOnDestroy(): void {

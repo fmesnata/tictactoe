@@ -1,0 +1,14 @@
+<mat-card class="notification winner-color" *ngIf="gameState === 'WON' && isWinner">
+  <mat-icon>sentiment_very_satisfied</mat-icon>
+  <span>Vous avez gagné ! Bravo !</span>
+</mat-card>
+
+<mat-card class="notification looser-color" *ngIf="gameState === 'WON' && !isWinner">
+  <mat-icon>sentiment_very_dissatisfied</mat-icon>
+  <span>Vous avez perdu. Retentez votre chance !</span>
+</mat-card>
+
+<mat-card class="notification draw-color" *ngIf="gameState === 'DRAW'">
+  <mat-icon>sentiment_satisfied</mat-icon>
+  <span>Match nul. Une revanche ?</span>
+</mat-card>

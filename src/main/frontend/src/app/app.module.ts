@@ -17,6 +17,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import { SymbolComponent } from './game/symbol/symbol.component';
 import { GridComponent } from './game/grid/grid.component';
+import { ResultNotificationComponent } from './game/result-modal/result-notification.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GridComponent } from './game/grid/grid.component';
     GameComponent,
     AuthenticationComponent,
     SymbolComponent,
-    GridComponent
+    GridComponent,
+    ResultNotificationComponent
   ],
   imports: [
     BrowserModule,

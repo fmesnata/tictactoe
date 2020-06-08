@@ -49,8 +49,15 @@
 
   <section class="gameboard">
     <h2>Board</h2>
+    <app-result-notification [isWinner]="isCurrentUserWinner()"
+                             [gameState]="this.game.state"
+                             *ngIf="isGameFinish()">
+    </app-result-notification>
 
-    <app-grid [grid]="game.grid" [winningLine]="game.winningLine" (addSymbolEvent)="addSymbol($event)"></app-grid>
+    <app-grid [grid]="game.grid"
+              [winningLine]="game.winningLine"
+              (addSymbolEvent)="addSymbol($event)">
+    </app-grid>
   </section>
 
   <section class="score">
