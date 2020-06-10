@@ -71,7 +71,6 @@ class SuccessHandler implements AuthenticationSuccessHandler {
     }
 }
 
-
 class LogoutSuccess implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
