@@ -3,5 +3,20 @@
 }
 
 .winning-symbol {
-  color: limegreen;
+  color: gold;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.circle {
+  color: dodgerblue;
+}
+
+.cross {
+  color: #fa4d4d;
 }
